@@ -9,7 +9,7 @@ logtail="$(tail -n 50 /var/log/clamav/clamav.log | tac)"
 
 # send email
 export HOME=/root
-/usr/bin/printf "Host: $HOSTNAME.\n$alert\n\ntail -n 50 /var/log/clamav/clamav.log\n\n\n$logtail" | /usr/bin/mailx -s "VIRUS ALERT - $HOSTNAME" -r REPLY@YOURDOMAIN.COM "ALERTS@YOURDOMNAIN.COM"
+/usr/bin/printf "Host: $HOSTNAME.\n$alert\n\ntail -n 50 /var/log/clamav/clamav.log\n\n\n$logtail" | /usr/bin/mailx -s "VIRUS ALERT - $HOSTNAME" -r john.penney@gmail.com "john.penney@gmail.com"
 
 # Send the alert to systemd logger if exist, othewise to /var/log
 if [[ -z $(command -v systemd-cat) ]]; then
