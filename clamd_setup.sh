@@ -39,13 +39,15 @@ systemctl enable clamav-clamonacc.service
 systemctl enable clamav-freshclam.service
 
 # Configure ClamAV
-sed -i 's/#LogFile /LogFile \/var\/log\/clamd.scan/' /etc/clamd.d/scan.conf
-sed -i 's/#LogRotate /LogRotate \/var\/log\/clamd.scan/' /etc/clamd.d/scan.conf
-sed -i 's/#PidFile /PidFile \/run\/clamd.scan\/clamd.pid/' /etc/clamd.d/scan.conf
-sed -i 's/#TCPSocket /TCPSocket 3310/'  /etc/clamd.d/scan.conf
-sed -i 's/#OnAccessIncludePath /OnAccessIncludePath \/upload/'  /etc/clamd.d/scan.conf
-sed -i 's/#OnAccessPrevention /OnAccessPrevention yes/' /etc/clamd.d/scan.conf
-sed -i 's/#OnAccessExtraScanning /OnAccessExtraScanning yes/' /etc/clamd.d/scan.conf
+sed -i 's/#LogFile /LogFile /' /etc/clamd.d/scan.conf
+sed -i 's/#LogRotate /LogRotate /' /etc/clamd.d/scan.conf
+sed -i 's/#PidFile /PidFile /' /etc/clamd.d/scan.conf
+sed -i 's/#TCPSocket /TCPSocket /'  /etc/clamd.d/scan.conf
+sed -i 's/#TCPAddr /TCPAddr /'  /etc/clamd.d/scan.conf
+sed -i '/OnAccessIncludePath \/home/a OnAccessIncludePath \/upload/'  /etc/clamd.d/scan.conf
+sed -i 's/#OnAccessPrevention /OnAccessPrevention /' /etc/clamd.d/scan.conf
+sed -i 's/#OnAccessExtraScanning /OnAccessExtraScanning /' /etc/clamd.d/scan.conf
 
 systemctl start clamd.service && systemctl start clamav-freshclam.service && systemctl start clamav-clamonacc.service
+#systemctl stop clamd.service && systemctl stop clamav-freshclam.service && systemctl stop clamav-clamonacc.service
 
