@@ -52,6 +52,7 @@ sed -i 's/#LogRotate /LogRotate /' /etc/clamd.d/scan.conf
 sed -i 's/#PidFile /PidFile /' /etc/clamd.d/scan.conf
 sed -i 's/#TCPSocket /TCPSocket /'  /etc/clamd.d/scan.conf
 sed -i 's/#TCPAddr /TCPAddr /'  /etc/clamd.d/scan.conf
+sed -i '/#VirusEvent/a VirusEvent echo %v |tail -n1 /var/log/clamd.scan |mail -s "A virus has been found on the Office Server" john.penney@gmail.com' /etc/clamd.d/scan.conf
 sed -i '/OnAccessIncludePath \/home/a OnAccessIncludePath \/upload/'  /etc/clamd.d/scan.conf
 sed -i 's/#OnAccessPrevention /OnAccessPrevention /' /etc/clamd.d/scan.conf
 sed -i 's/#OnAccessExtraScanning /OnAccessExtraScanning /' /etc/clamd.d/scan.conf
@@ -64,8 +65,9 @@ systemctl start clamd.service && systemctl start clamav-freshclam.service && sys
 #things i need to look at on start of clamav hits cpu hard may need to renice process 
 #added following to email last line in log file need to add in file name and server name 
 #this is in /etc/clamd.d/scan.conf
-#VirusEvent echo %v | mail -s "A virus has been found on the Office Server" john.penney@gmail.com < tail -n1 /var/log/clamd.scan
+#VirusEvent echo %v |tail -n1 /var/log/clamd.scan |mail -s "A virus has been found on the Office Server" john.penney@gmail.com
 
+sed  '/VirusEvent/a VirusEvent echo %v |tail -n1 /var/log/clamd.scan |mail -s "A virus has been found on the Office Server" john.penney@gmail.com/' /etc/clamd.d/scan.conf
 
 #stoping looks to hang need fix systectl scripts
 #systemctl stop clamd.service && systemctl stop clamav-freshclam.service && systemctl stop clamav-clamonacc.service
