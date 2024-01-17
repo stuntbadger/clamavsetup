@@ -58,5 +58,8 @@ sed -i 's/#OnAccessExtraScanning /OnAccessExtraScanning /' /etc/clamd.d/scan.con
 
 #starting the services 
 systemctl start clamd.service && systemctl start clamav-freshclam.service && systemctl start clamav-clamonacc.service
+
+# clamav-clamonacc.service may fail to load this is likley due to clamd.service  not fully finished needs to say loaded signatures in logs in before it can start  
+
 #systemctl stop clamd.service && systemctl stop clamav-freshclam.service && systemctl stop clamav-clamonacc.service
 
