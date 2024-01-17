@@ -61,5 +61,12 @@ systemctl start clamd.service && systemctl start clamav-freshclam.service && sys
 
 # clamav-clamonacc.service may fail to load this is likley due to clamd.service  not fully finished needs to say loaded signatures in logs in before it can start  
 
+#things i need to look at on start of clamav hits cpu hard may need to renice process 
+#added following to email last line in log file need to add in file name and server name 
+#this is in /etc/clamd.d/scan.conf
+#VirusEvent echo %v | mail -s "A virus has been found on the Office Server" john.penney@gmail.com < tail -n1 /var/log/clamd.scan
+
+
+#stoping looks to hang need fix systectl scripts
 #systemctl stop clamd.service && systemctl stop clamav-freshclam.service && systemctl stop clamav-clamonacc.service
 
