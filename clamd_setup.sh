@@ -72,3 +72,9 @@ sed  '/VirusEvent/a VirusEvent echo %v |tail -n1 /var/log/clamd.scan |mail -s "A
 #stoping looks to hang need fix systectl scripts
 #systemctl stop clamd.service && systemctl stop clamav-freshclam.service && systemctl stop clamav-clamonacc.service
 
+
+#notes for adding in proxy servers 
+#/etc/freshclam.conf
+
+#HTTPProxyServer x.x.x.
+HTTPProxyPort 3128
